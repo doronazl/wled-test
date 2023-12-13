@@ -222,7 +222,7 @@ void MultiRelay::handleOffTimer() {
   unsigned long now = millis();
   bool activeRelays = false;
   for (int i=0; i<MULTI_RELAY_MAX_RELAYS; i++) {
-    if (_relay[i].active && _switchTimerStart > 0 && now - _switchTimerStart > (_relay[i].delay*1000)) {
+    if (_relay[i].active && _switchTimerStart > 0 && now - _switchTimerStart > (_relay[i].delay*1)) {
       if (!_relay[i].external) switchRelay(i, !offMode);
       _relay[i].active = false;
     } else if (periodicBroadcastSec && now - lastBroadcast > (periodicBroadcastSec*1000)) {
