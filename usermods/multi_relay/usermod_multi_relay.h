@@ -513,9 +513,9 @@ void MultiRelay::setup() {
  */
 void MultiRelay::loop() {
   yield();
-  if (!enabled || strip.isUpdating()) return;
+ static unsigned long lastUpdate = 0;
+ if (!enabled || (strip.isUpdating() && millis() - lastUpdate < 100)) return;
 
-  static unsigned long lastUpdate = 0;
   if (millis() - lastUpdate < 100) return;  // update only 10 times/s
   lastUpdate = millis();
 
